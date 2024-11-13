@@ -43,8 +43,10 @@ public class Calculator {
                 break;
             case '*' :
                 result = (double) a * b;
+                break;
             case '/' :
                 result = (double) a / b;
+                break;
             default :
                 break;
         };
