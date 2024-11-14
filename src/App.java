@@ -39,7 +39,7 @@ public class App {
                         secondNumberIsPositive = -1;
                         second_input.substring(1);
                     }
-                    secondNum = second_input.contains(".")? Double.parseDouble(second_input) * firstNumberIsPositive: Integer.parseInt(second_input) * firstNumberIsPositive;
+                    secondNum = second_input.contains(".")? Double.parseDouble(second_input) * secondNumberIsPositive: Integer.parseInt(second_input) * secondNumberIsPositive;
                     break;
                 } catch (NumberFormatException e){
                     System.out.println("두 번째 값 입력이 잘못되었습니다. 실수를 입력해주세요.");
