@@ -7,6 +7,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
         while(true) {
+            //양수 음수 여부
             int firstNumberIsPositive = 1;
             int secondNumberIsPositive = 1;
             String first_input;
@@ -54,7 +55,7 @@ public class App {
                     System.out.println(e.getMessage());
                 }
             }
-            try{
+            try{//계산 로직
                 double result = calculator.calculate(firstNum, secondNum);
                 System.out.println("결과: " + result);
             } catch (NumberFormatException | CalculatorException e) {
@@ -65,6 +66,7 @@ public class App {
             System.out.println("더 계산하시겠습니까?(exit: 종료, nlist: 특정 값보다 큰 입력값 출력, alist:모든 결과값 출력,remove: 가장 오래된 입력 지움, 나머지: 계속)");
             scanner.nextLine();
             String consist = scanner.nextLine();
+            //계속할 지 여부(안내와 다른 입력 시 계산기 계속 실행)
             if(consist.equals("nlist")) {
                 String compareNum = scanner.nextLine();
                 try {
@@ -72,7 +74,6 @@ public class App {
                 } catch (CalculatorException e) {
                     System.out.println(e.getMessage());
                 }
-
             }
             if(consist.equals("alist")) calculator.getAllResults();
             if(consist.equals("remove")) calculator.removeResult();
