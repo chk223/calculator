@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Calculator<T extends Number> {
     private Operation operator;
@@ -33,12 +35,15 @@ public class Calculator<T extends Number> {
     public void getResults(T a) throws CalculatorException {
         try {
             System.out.print("출력 결과: ");
-            results.stream().filter(result -> result > a.doubleValue())
-                    .forEach(result -> System.out.print(result + " "));
-            System.out.println();
-            System.out.println(a.doubleValue() + "보다 큰 값들 출력 완료.");
+            List<Double> filterList = results.stream().filter(result -> result > a.doubleValue()).collect(Collectors.toList());
+            if(filterList.isEmpty()) System.out.println("출력 컬렉션에 해당 조건을 만족하는 값이 없습니다!");
+            else {
+                filterList.forEach(result -> System.out.print(result + " "));
+                System.out.println();
+                System.out.println(a.doubleValue() + "보다 큰 값들 출력 완료.");
+            }
         } catch (Exception e) {
-            throw new CalculatorException("출력 컬렉션", "올바른 결과값");
+            throw new CalculatorException("출력 컬렉션", "올바른 값");
         }
     }
     /**모든 값 출력*/
@@ -46,7 +51,7 @@ public class Calculator<T extends Number> {
         if(results.isEmpty()) System.out.println("저장 된 결과 값이 없습니다.");
         else {
             System.out.print("출력 결과: ");
-            results.stream().forEach(result -> System.out.print(result+" "));
+            results.forEach(result -> System.out.print(result+" "));
             System.out.println();
         }
     }

@@ -60,7 +60,6 @@ public class App {
                 return need;
             };
             //계속할 지 여부(안내와 다른 입력 시 계산기 계속 실행)
-            scanner.nextLine();
             String consist = needs.needs();
             do {
                 //n값을 입력 받고, n값보다 큰 값 출력
