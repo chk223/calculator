@@ -4,7 +4,6 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
         while(true) {
-            //입력 값
             Number firstNum;
             Number secondNum;
             //입력 값 받는 로직, 1,2번째 입력 값을 람다 함수를 통해 받도록 구현(리팩터링)
@@ -22,7 +21,7 @@ public class App {
                         }
                         //정수 실수 구분
                         inputNum = input_value.contains(".")? Double.parseDouble(input_value) * inputValueIsPositive: Integer.parseInt(input_value) * inputValueIsPositive;
-                        System.out.println("현재 입력된 값: " + inputNum);
+                        System.out.println(where +" 번째 입력된 값: " + inputNum);
                         break;
                     } catch (NumberFormatException e){
                         System.out.println(where+" 번째 값 입력이 잘못되었습니다. 실수를 입력해주세요.");
@@ -36,12 +35,16 @@ public class App {
 
             while(true){
                 System.out.println("사칙연산 기호 입력: ");
-                char operator = scanner.next().charAt(0);
-                try{
-                    calculator.setOperator(operator);
-                    break;
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
+                String operatorInput = scanner.nextLine();
+                if(operatorInput.length()>1) System.out.println(new CalculatorException("연산자","연산자 기호 하나만").getMessage());
+                else{
+                    char operator = operatorInput.charAt(0);
+                    try{
+                        calculator.setOperator(operator);
+                        break;
+                    } catch (CalculatorException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
             try{//계산 로직
