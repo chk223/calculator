@@ -28,7 +28,6 @@ public class Calculator<T extends Number> {
     }
     /**람다&스트림을 사용해서 조건에 따라 출력 값을 모아둔 컬렉션 출력*/
     public void getResults(T a) throws CalculatorException {
-        //
         try {
             results.stream().filter(result -> result > a.doubleValue())
                     .forEach(result -> System.out.print(result + " "));

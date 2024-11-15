@@ -14,39 +14,32 @@ public class App {
             String second_input;
             Number firstNum;
             Number secondNum;
+            InputDoubleValue getInputValue = (where) -> {
+                int inputValueIsPositive = 1;
+                Number inputNum;
+                while(true) {
+                    System.out.println(where + " 번째 수 입력: ");
+                    String input_value = scanner.nextLine();
+                    try {
+                        //양수 음수 구분
+                        if(input_value.contains("-") && input_value.length() >1){
+                            inputValueIsPositive = -1;
+                            input_value = input_value.substring(1);
+                        }
+                        //정수 실수 구분
+                        inputNum = input_value.contains(".")? Double.parseDouble(input_value) * inputValueIsPositive: Integer.parseInt(input_value) * inputValueIsPositive;
+                        System.out.println("현재 입력된 값: " + inputNum);
+                        break;
+                    } catch (NumberFormatException e){
+                        System.out.println(where+" 번째 값 입력이 잘못되었습니다. 실수를 입력해주세요.");
+                    }
+                }
+                return inputNum;
+            };
             //각 입력 마다 예외처리 -> 예외 발생 시 다시 입력 받도록 구현
-            while(true) {
-                System.out.println("첫 번째 수 입력: ");
-                first_input = scanner.nextLine();
-                try {
-                    //양수 음수 구분
-                    if(first_input.contains("-")){
-                        firstNumberIsPositive = -1;
-                        first_input = first_input.substring(1);
-                    }
-                    //정수 실수 구분
-                    firstNum = first_input.contains(".")? Double.parseDouble(first_input) * firstNumberIsPositive: Integer.parseInt(first_input) * firstNumberIsPositive;
-                    System.out.println("현재 입력된 값: " + firstNum);
-                    break;
-                } catch (NumberFormatException e){
-                    System.out.println("첫 번째 값 입력이 잘못되었습니다. 실수를 입력해주세요.");
-                }
-            }
-            while(true) {
-                System.out.println("두 번째 수 입력: ");
-                second_input = scanner.nextLine();
-                try{
-                    if(second_input.contains("-")){
-                        secondNumberIsPositive = -1;
-                        second_input = second_input.substring(1);
-                    }
-                    secondNum = second_input.contains(".")? Double.parseDouble(second_input) * secondNumberIsPositive: Integer.parseInt(second_input) * secondNumberIsPositive;
-                    System.out.println("현재 입력된 값: " + secondNum);
-                    break;
-                } catch (NumberFormatException e){
-                    System.out.println("두 번째 값 입력이 잘못되었습니다. 실수를 입력해주세요.");
-                }
-            }
+            firstNum = getInputValue.getInputValue("첫");
+            secondNum = getInputValue.getInputValue("두");
+
             while(true){
                 System.out.println("사칙연산 기호 입력: ");
                 char operator = scanner.next().charAt(0);
