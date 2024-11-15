@@ -22,9 +22,12 @@ public class Calculator<T extends Number> {
         results.add(result);
     }
     /**컬렉션의 첫 번째 값(FIFO) 제거*/
-    public void removeResult() {
-        System.out.println("지울 결과 값:" + results.get(0));
-        results.remove(0);
+    public void removeResult() throws CalculatorException {
+        if(results.isEmpty()) throw new CalculatorException("값 제거", "결과 값 저장 후 해당 기능을 ");
+        else {
+            System.out.println("지울 결과 값:" + results.get(0));
+            results.remove(0);
+        }
     }
     /**람다&스트림을 사용해서 조건에 따라 출력 값을 모아둔 컬렉션 출력*/
     public void getResults(T a) throws CalculatorException {

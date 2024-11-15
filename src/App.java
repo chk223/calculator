@@ -72,7 +72,13 @@ public class App {
                 }
                 //저장된 모든 결과값 출력
                 else if(consist.equals("alist")) calculator.getAllResults();
-                else if(consist.equals("remove")) calculator.removeResult();
+                else if (consist.equals("remove")) {
+                    try {
+                        calculator.removeResult();
+                    } catch (CalculatorException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
                 else break;
                 consist = needs.needs();
             }while(true);
