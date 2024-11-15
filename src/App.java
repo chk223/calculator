@@ -7,13 +7,10 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
         while(true) {
-            //양수 음수 여부
-            int firstNumberIsPositive = 1;
-            int secondNumberIsPositive = 1;
-            String first_input;
-            String second_input;
+            //입력 값
             Number firstNum;
             Number secondNum;
+            //입력 값 받는 로직, 1,2번째 입력 값을 람다 함수를 통해 받도록 구현(리팩터링)
             InputDoubleValue getInputValue = (where) -> {
                 int inputValueIsPositive = 1;
                 Number inputNum;
