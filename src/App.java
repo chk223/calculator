@@ -1,7 +1,4 @@
 import java.util.Scanner;
-
-//TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
-// 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -53,22 +50,33 @@ public class App {
             } catch (NumberFormatException | CalculatorException e) {
                 System.out.println(e.getMessage());
             }
-
-
-            System.out.println("더 계산하시겠습니까?(exit: 종료, nlist: 특정 값보다 큰 입력값 출력, alist:모든 결과값 출력,remove: 가장 오래된 입력 지움, 나머지: 계속)");
-            scanner.nextLine();
-            String consist = scanner.nextLine();
+            //계산 후 더 할지 혹은 다른 기능을 실행할지 입력 받는 함수
+            Needs needs = () -> {
+                System.out.println("더 계산하시겠습니까?(exit: 종료, nlist: 특정 값보다 큰 입력값 출력, alist:모든 결과값 출력,remove: 가장 오래된 입력 지움, 나머지: 계속)");
+                String need = scanner.nextLine();
+                return need;
+            };
             //계속할 지 여부(안내와 다른 입력 시 계산기 계속 실행)
-            if(consist.equals("nlist")) {
-                String compareNum = scanner.nextLine();
-                try {
-                    calculator.getResults(Double.parseDouble(compareNum));
-                } catch (CalculatorException e) {
-                    System.out.println(e.getMessage());
+            scanner.nextLine();
+            String consist = needs.needs();
+            do {
+                //n값을 입력 받고, n값보다 큰 값 출력
+                if(consist.equals("nlist")) {
+                    System.out.println("저장된 값 중 n보다 큰 값을 조회합니다. n 값 입력:");
+                    String compareNum = scanner.nextLine();
+                    try {
+                        calculator.getResults(Double.parseDouble(compareNum));
+                    } catch (CalculatorException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-            }
-            if(consist.equals("alist")) calculator.getAllResults();
-            if(consist.equals("remove")) calculator.removeResult();
+                //저장된 모든 결과값 출력
+                else if(consist.equals("alist")) calculator.getAllResults();
+                else if(consist.equals("remove")) calculator.removeResult();
+                else break;
+                consist = needs.needs();
+            }while(true);
+
             if (consist.equals("exit")) break;
         }
     }
