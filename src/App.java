@@ -50,7 +50,7 @@ public class App {
             } catch (NumberFormatException | CalculatorException e) {
                 System.out.println(e.getMessage());
             }
-            //계산 후 더 할지 혹은 다른 기능을 실행할지 입력 받는 함수
+            /**계산 후 더 할지 혹은 다른 기능을 실행할지 입력 받는 함수*/
             Needs needs = () -> {
                 System.out.println("더 계산하시겠습니까?(exit: 종료, nlist: 특정 값보다 큰 입력값 출력, alist:모든 결과값 출력,remove: 가장 오래된 입력 지움, 나머지: 계속)");
                 String need = scanner.nextLine();

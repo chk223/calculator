@@ -41,8 +41,11 @@ public class Calculator<T extends Number> {
     }
     /**모든 값 출력*/
     public void getAllResults() {
-        results.stream().forEach(result -> System.out.print(result+" "));
-        System.out.println();
+        if(results.isEmpty()) System.out.println("저장 된 결과 값이 없습니다.");
+        else {
+            results.stream().forEach(result -> System.out.print(result+" "));
+            System.out.println();
+        }
     }
     /**계산 로직*/
     public double calculate(T a, T b) throws CalculatorException {
