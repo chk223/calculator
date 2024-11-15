@@ -7,22 +7,14 @@ public class Calculator<T extends Number> {
     public Calculator() {
         results = new ArrayList<Double>();
     }
+    /**람다식을 이용하여 리팩터링. 연산자 설정*/
     public void setOperator(char operator) {
         switch (operator) {
-            case '+':
-                this.operator = Operation.ADDITION;
-                break;
-            case '-':
-                this.operator = Operation.SUBTRACTION;
-                break;
-            case '*':
-                this.operator = Operation.MULTIPLICATION;
-                break;
-            case '/':
-                this.operator = Operation.DIVISION;
-                break;
-            default:
-                throw new IllegalArgumentException("연산자가 잘못 입력됐어요. 다시 입력해주세요. 입력한 연산자: " + operator);
+            case '+' -> this.operator = Operation.ADDITION;
+            case '-' -> this.operator = Operation.SUBTRACTION;
+            case '*' -> this.operator = Operation.MULTIPLICATION;
+            case '/' -> this.operator = Operation.DIVISION;
+            default -> throw new IllegalArgumentException("연산자가 잘못 입력됐어요. 다시 입력해주세요. 입력한 연산자: " + operator);
         }
     }
     /**리스트에 결과 값 저장*/
@@ -53,6 +45,7 @@ public class Calculator<T extends Number> {
     /**계산 로직*/
     public double calculate(T a, T b) throws CalculatorException {
         double result = 0;
+        /**커스텀 인터페이스, 람다식을 통해 부동 소수점 문제 해결(소수점 2번째 자리 반올림)*/
         RoundDoubleValue roundResult = (doubleValue) -> {
             double range = Math.pow(10,2);
             return Math.round(doubleValue*range)/range;
