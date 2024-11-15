@@ -48,10 +48,15 @@ public class Calculator<T extends Number> {
     /**모든 값 출력*/
     public void getAllResults() {
         results.stream().forEach(result -> System.out.print(result+" "));
+        System.out.println();
     }
     /**계산 로직*/
     public double calculate(T a, T b) throws CalculatorException {
         double result = 0;
+        RoundDoubleValue roundResult = (doubleValue) -> {
+            double range = Math.pow(10,2);
+            return Math.round(doubleValue*range)/range;
+        };
         switch (this.operator) {
             case ADDITION:
                 result = a.doubleValue() + b.doubleValue();
@@ -69,6 +74,7 @@ public class Calculator<T extends Number> {
             default :
                 throw new CalculatorException("연산자", "올바른 연산자(+,-,*,/)");
         };
+        result = roundResult.round(result);
         this.addResult(result);
         return result;
     }
